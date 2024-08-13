@@ -11,8 +11,9 @@ let server = http.createServer(async function (req, res) {
         const pathname = url.parse(req.url, true)['pathname'];
         const query = url.parse(req.url, true)['query'];
         let query_url = query.url;
+        let query_html = query.html;
 
-        if(typeof query_url !== 'undefined'){
+        if(typeof query_url !== 'undefined' || typeof query_html !== 'undefined'){
             let available_options = {
                 '/pdf':{
                     format:'string',
@@ -53,7 +54,11 @@ let server = http.createServer(async function (req, res) {
             });
 
             const page = await browser.newPage();
-            await page.goto(query_url);
+            if(typeof query_url !== 'undefined'){
+                await page.goto(query_url);
+            }else if(typeof query_html !== 'undefined'){
+                await page.setContent(query_html);
+            }
 
             if(print_options.hasOwnProperty('wait')){
                 await page.waitForSelector(print_options.wait);

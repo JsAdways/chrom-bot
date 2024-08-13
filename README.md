@@ -37,3 +37,10 @@ http://domain:port/screenshot?format=png&location=0,0&size=1920,1080&fullPage=fa
 
 * more option check 
 https://pptr.dev/api/puppeteer.page.screenshot
+
+---
+#Render page content with HTML
+
+* use post method rather than get method
+* put html=YOUR_CUSTOM_HTML_STRING
+* render pdf and image support both supported
