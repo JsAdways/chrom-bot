@@ -1,6 +1,7 @@
 var puppeteer = require('puppeteer')
 var http = require('http');
 var url = require('url');
+const formidable = require('formidable');
 
 let server = http.createServer(async function (req, res) {
     let error_response = {
@@ -11,7 +12,14 @@ let server = http.createServer(async function (req, res) {
         const pathname = url.parse(req.url, true)['pathname'];
         const query = url.parse(req.url, true)['query'];
         let query_url = query.url;
-        let query_html = query.html;
+        let query_html = '';
+
+        const form = formidable({ multiples: true });
+        form.parse(req, (err, fields, files) => {
+            if(typeof fields['html'] !== 'undefined'){
+                query_html = fields['html'];
+            }
+        });
 
         if(typeof query_url !== 'undefined' || typeof query_html !== 'undefined'){
             let available_options = {

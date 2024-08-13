@@ -42,5 +42,5 @@ https://pptr.dev/api/puppeteer.page.screenshot
 #Render page content with HTML
 
 * use post method rather than get method
-* put html=YOUR_CUSTOM_HTML_STRING
+* use form-data post html content as string
 * render pdf and image support both supported
