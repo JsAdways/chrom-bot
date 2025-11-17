@@ -1,4 +1,4 @@
-FROM node:22.0
+FROM node:22.11
 COPY ./ /var/project
 RUN apt-get update && apt-get install -y vim nano chromium
 RUN apt-get install -y fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core

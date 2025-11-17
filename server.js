@@ -57,8 +57,13 @@ let server = http.createServer(async function (req, res) {
             const browser = await puppeteer.launch({
                 headless: true,
                 executablePath: '/usr/bin/chromium',
-                args: ['--no-sandbox'],
-                ignoreDefaultArgs: [ '--disable-extensions' ],
+                args: [
+                    '--no-sandbox',
+                    '--disable-setuid-sandbox',
+                    '--disable-dev-shm-usage'
+                ],
+                ignoreDefaultArgs: ['--disable-extensions'],
+                protocolTimeout: 180000,
             });
 
             const page = await browser.newPage();
